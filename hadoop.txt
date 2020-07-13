@@ -1,0 +1,66 @@
+Set of deamon which achieves functionality
+
+Core components of Hadoop
+
+Map Reduce (Processing)
+
+HDFS
+Daemons for storage
+Each machine has storage and processing 
+Including master and slave
+
+There are five kinds of daemon in V1
+1)Name Node: Master node for storage( Meta data .holds information where ther is storage)
+             maintains and manages blocks on Name node
+             single point of failure
+             Manage block Replication
+             Master Daemon of HDFS
+             Has algorithm which decides about replication
+2)Data Node: Real data. Stores actual data
+             Storage actual data
+             Interaction wiht client for read/write
+3)Secondary Name Node:Backup of the name node. Performs house keeping functions for the Name Node
+             takes update an hour
+             Manages the Edit log and check-pointing of NameNode metadat( Once per hours or 64MB size )
+             Copies FSIImage and Transaction Log from NameNode
+
+64mb of change is a big change
+
+Processing
+4) Job tracker: Manages Mapreduce jobs,distributes individual tasks. Small task
+5) Task tracker: MOnitoring individual Map and Reduce tasks
+
+Every node has a heart beat and block report: ex 3 chances
+    It would self heal it
+    
+Over replication:
+     4 copies
+
+Master Node
+   Name Node
+Browser  Secondary NameNode Jobtracker
+Hadoop Utility JVM
+Linux Os
+Server
+
+Slave node
+TaskTracker DataNode
+JVM
+Linux OS
+Server
+
+HDFS: read and write
+
+3 into 3 = 12
+
+Name node:
+Was created with the concept og GFS
+Default replication is 3
+Allows data to be read and processed
+supports - writes, deletes, appends and reads operations on files, but not updates
+
+is implemented as a block-structured file system ( 64 MB or 128 MB or 256 MB )
+
+This is happening automatically
+We can configure it
+

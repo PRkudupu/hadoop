@@ -1,0 +1,301 @@
+MAPR-memory based : Looks like file system-managing memory
+based on load fall to file
+
+MAPR system replace hdfs (Adhar )
+
+pre cursor
+MAPRDB
+500 GBmemory RAM : 400 node cluster
+critical with SSD: Master on SSD. Slave on 
+ROI: 
+analytics product top of Hadoop. 
+JOIN 
+tempdb Spill.
+
+Multi head hardisk
+
+IOPS ?
+
+
+Hive
+Makes hadoop easy
+Unstructure to structure
+layer of datawarehouse system
+Created by facebook
+Top level project under Apache
+hive.apache.org
+
+like a database
+
+Good invested to Hive
+
+Spark is a challenge to get technical resource
+
+HIVE FEATURES
+Supports SQL like language called HiveQL
+Enables to provide custom mappers and reducers
+Data warehouse Infrastructure
+It supports to enable ETL tools
+
+SITUATIONS WHERE WE USE
+1) Want to query data
+2) Familiar with SQL
+3) Want answer for specific questions
+
+*Is not real time
+*Uses Map reduce
+
+Integrates differnt file formats
+
+Map reduce is batch oriented program: There is latency
+
+If we get data through Hive.
+Hive stores the meta data
+
+Tableua : ODBC connection to Hive
+
+HIVE ARCHITECTURE
+
+Hive                   Hadoop
+CMD                    Resource manager, Mapreduce,DataNode,Node Mgr
+Web UI
+
+Driver
+Compiler
+
+Execution Engine
+Metastore 
+
+FIles
+csv,xml,json files
+
+Execution Engine: Interacting with the hadoop layer
+
+All Sit on one block:Architecure
+DERB
+
+On demand we can use MySql
+User defines the data.
+
+TESTING
+Hdfs all nodes
+Hive
+MySql
+24gb memory
+
+can we have multiple hive node
+They are inside the cluster: Query data from the cluster is faster
+
+CLustered gets reokicated automatically
+
+Excecution engine: Push the jobs
+
+UI: user can interact wither from terminal or web browser 
+DRIVER: It hanldes session
+COMPILER: SEnd and recive request, responses to meta store if the schema
+          is available or not
+Meta store : Store the schema of table
+Execution Engine:Take the request from driver
+
+HIVE PROCESSING FLOW
+
+HIVE SERVICES
+Embedded Meta store Drive -> Meta Store -> Derb
+Local Meta Store: Drive, Meta store --> MySQL (mariaDB)
+
+DATA TYPES
+Numeric types
+
+string types
+booolena type
+complex types
+Array, Map,Union
+
+HiveQL
+Select particular field by usng WHERE clause
+Replace the data by using OVERWRITE commans
+Inster the data inot to the table by using LOAD command
+Create external table by using EXTERNAL command
+
+SQL VS HiveQL
+HIve:
+INSERT OVERWRITE TABLE( populates whole table or partition )
+transaction : Supported with less support ( may be in 2.1 )
+Only in FROM cluase only non correlated
+
+Create table is not support
+multiple table insert
+views are materialized
+
+supports functions
+Restrictions on sub query only on correlated
+
+Join: Inner join, outer joins, semi joins, map joins, SQL-92 syntax wiht hinting
+
+Table: Looks like a table. Information about it is in the metadata
+files to bring in memory
+
+HIVE IS NOT
+Relational database
+designed fro OLTP
+suited for row level updates
+
+MAPR future editions would support indexes
+
+DATA units
+Databases: Namespaces that seperate tables and other data units from naming confliction
+tables: Homogeneous units of data whihc have the same schema
+Partition: means dividing a table inot a coarse grained parts based on the value of a parition olumn 
+ such as a date. This make it faster to do queries on slices of the data
+Buckets give structure to the data that may be used for more effecient queries
+
+A join of two table that are bucked on the same column -including the join column
+ can be implemented as Map Side Join
+
+Bucketing by user ID means we can quickly evaluate a user based query by running 
+it on a randomized sample of the total set of users
+
+mutiple partition and multiple buckets of database
+
+Map join: Partitioned and bucketed on the same key
+
+bucket is a sub partition
+
+
+HIVE Tables
+Managed/Internal Table :
+A table whose schema will be created in meta store and data will be store in warehouse.
+Syntax: create Table emp(id int, name string sal float)
+When data is outside
+
+
+External Table: A table whose table name will be created as a DIR and schema will be create
+in a meta store
+Already existing in HDFS
+
+Most often used
+syntax: create external Table student(stu_id int, stu_name string, stu_marks int)
+
+JSON file has meta data
+NO rollback
+
+multitable insert
+reading file from one source 
+
+cannot query local file
+configuration parameters
+
+
+OverWrite
+No transaction log in hive
+
+JOINS
+
+* outsourcing replication to HDFS
+Rack awareness
+
+DATA LOADING
+Local file system
+HDFS
+
+DELETE is available
+Actually creating new set of files
+Meta store would use new file
+
+HIVE SERDE
+
+Desire features in File Formats
+Specify file types
+Splitable         : File is split irrespective of content based on block size
+                    This is to facilitate Parallel execution over Hadoop nodes
+Block Compression : Better compression ratio mean better read/Write performance.
+                    Compression/ Un Compression preferred at block level rather then full size
+Schema Evolution : Schema evalutaiton. schema would change
+Row/Column       : Write operations are generally more expensive on cooumnar File Formats
+                   Read operations could be more effecient if reading only 
+                   small subset of all Columns
+Data /Metadata   : Storing metadat with file facilitates flexibility
+
+
+Column : Faster useful in IOT
+         Does not have to reas all data in a row
+
+CSV and text are row typed
+CSv are structured and text are not structured
+
+FILE FORMATS
+
+XML JSON
+ Have metadata schema evaluation is possible
+ JSON: document processing and light weight
+
+Sequence and avro: Are row formats
+
+RC, ORC
+,PARQUET are columnar 
+RC and ORC are Intense, Not advised
+
+Orc: And New column to End of structure
+
+*temporary data in HDFS
+
+
+COMPRESSION RATIO
+
+Text (585 GB)
+RCFile (505 GB):14%
+Parquet (221 GB) :62% : Format of choice
+ORCFile (131 GB) :78%
+
+Hive can change from text to above compression ratio
+Custom fi;
+
+
+Row: reasonable no of columns ro format:
+     Write full row
+Table is wide more columns
+     Only 4 columns used: read all 150 columns into memory
+
+Serde:
+Serializer a
+Types of Serdes
+
+Third party Serdes
+Custom serdes
+Thrift and RegX
+
+Clustered by : bucketing
+no of buckets
+
+MAP join -> Is like a hint
+hize.optimize.bucketmpajoin =true
+It would go to only that file
+
+select* from sys.options
+
+SORT MERGE JOIN
+UDF : Has to use JAVA
+Use as funciton in UDF
+
+PERFROMANCE
+Partition and bucketing
+hint
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

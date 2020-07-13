@@ -1,0 +1,70 @@
+apache would be the right place to know the configuration
+
+Rack level awareness
+
+same block should not be in the same node
+Never try to put all the blocks the same in the same ra
+
+rack awareness
+
+Map Reduce 2 phases
+
+Mapper phase 
+    Shuffle and sort
+Reduce phase
+
+OPTIONAL COMBINER:Miner
+Mini reducer
+cannot be done every time
+combiner would be same across all nodes
+
+Word count program
+
+RECORD READER
+row by row
+Helps translation
+0,TWINKLE  (18
+
+
+INPUT SPLIT
+HDFS Block
+
+Mapper Code
+
+Mapper<LongWritable, Text, Text,IntWritable>
+(input key value pair 
+Reducer Code
+
+Driver code :binding together
+
+Mapper output is reducer input
+
+Final there would be consolidation 
+
+Yarn:
+Yet Another Resource Negotioter
+
+Better resource manager
+hadoop v1 : batch Apps
+hadoop v2 : Batch, Interactive, Online
+
+Job Tracker: Resource Manager   : Managing resources
+             Application Master : Individual appliation
+
+Task Tracker replaced by Node manager
+
+Federal government
+state government: Only defined in its node
+
+daemons of the map reduce has changed
+
+Resource manager
+Owner of the apartments: Resource manager
+Property Manager or cleaner -Node manager
+
+Renter -Application
+AM: Asking resources
+One node would get reponsibility:
+Is per node
+
+b
